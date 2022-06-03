@@ -2,6 +2,7 @@ package com.imjustdoom;
 
 import com.sun.tools.javac.Main;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -14,7 +15,9 @@ import java.io.*;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,24 +28,41 @@ public class MCVersionChecker {
 
     public static void main(String[] args) throws SecurityException, IllegalArgumentException, IOException {
 
-        String sheetPath = Paths.get("").toAbsolutePath() + "\\sheet.xlsx";
+        String dir;
 
-        FileInputStream inp = new FileInputStream(sheetPath);
-        Workbook wb = WorkbookFactory.create(inp);
-        sheet = wb.getSheetAt(0);
+        while(true) {
 
-        String dir = "C:\\Users\\prest\\Downloads\\MC SERVER JAR AND PLUGIN MEGA ARCHIVE.LZMA1\\CraftBukkit (my collection)";
-        //String dir = "C:\\Users\\prest\\Downloads\\New folder";
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(System.in));
 
-        for (File file : new File(dir).listFiles()) {
-            if (file.isDirectory() && FilenameUtils.getExtension(file.listFiles()[0].getName()).equalsIgnoreCase("jar")) getBukkitVersion(file.listFiles()[0]);
-            else if (FilenameUtils.getExtension(file.getName()).equalsIgnoreCase("jar")) getBukkitVersion(file);
+            System.out.println("Enter the path to the server software files: ");
+            dir = reader.readLine();
+
+            if(!Paths.get(dir).toFile().exists()) {
+                System.out.println("Directory not found!");
+                continue;
+            }
+
+            Workbook wb = new HSSFWorkbook();
+
+            String sheetPath = Paths.get("").toAbsolutePath() + "/sheet.xlsx";
+            sheet = wb.createSheet("MCVersionChecker");
+
+            for (File file : new File(dir).listFiles()) {
+                if (file.isDirectory() && file.listFiles().length > 0 && FilenameUtils.getExtension(file.listFiles()[0].getName()).equalsIgnoreCase("jar"))
+                    getBukkitVersion(file.listFiles()[0]);
+                else if (FilenameUtils.getExtension(file.getName()).equalsIgnoreCase("jar")) getBukkitVersion(file);
+            }
+
+            System.out.println(System.lineSeparator() + "Finished scanning, saving data...");
+
+            // Write the output to a file
+            FileOutputStream fileOut = new FileOutputStream(sheetPath);
+            wb.write(fileOut);
+            fileOut.close();
+
+            System.out.println("Data saved to " + sheetPath + System.lineSeparator());
         }
-
-        // Write the output to a file
-        FileOutputStream fileOut = new FileOutputStream(sheetPath);
-        wb.write(fileOut);
-        fileOut.close();
     }
 
     public static void addRow(String build, String CBV, String MVC, String BV) {
@@ -160,6 +180,7 @@ public class MCVersionChecker {
             CBV = m2.group(1);
         }
 
+        if(msv == null) return;
         msv = msv.replace("Beta ", "b");
         if(true) {
             System.out.println("MC Version: " + msv);
