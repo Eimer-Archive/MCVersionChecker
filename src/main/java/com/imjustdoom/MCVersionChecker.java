@@ -49,14 +49,17 @@ public class MCVersionChecker {
             sheet = wb.createSheet("MCVersionChecker");
 
             for (File file : new File(dir).listFiles()) {
-                if (file.isDirectory() && file.listFiles().length > 0 && FilenameUtils.getExtension(file.listFiles()[0].getName()).equalsIgnoreCase("jar"))
-                    getBukkitVersion(file.listFiles()[0]);
-                else if (FilenameUtils.getExtension(file.getName()).equalsIgnoreCase("jar")) getBukkitVersion(file);
+                if (file.isDirectory() && file.listFiles().length > 0 && FilenameUtils.getExtension(file.listFiles()[0].getName()).equalsIgnoreCase("jar")) {
+                    try {
+                        getBukkitVersion(file.listFiles()[0]);
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
+                } else if (FilenameUtils.getExtension(file.getName()).equalsIgnoreCase("jar")) getBukkitVersion(file);
             }
 
             System.out.println(System.lineSeparator() + "Finished scanning, saving data...");
 
-            // Write the output to a file
             FileOutputStream fileOut = new FileOutputStream(sheetPath);
             wb.write(fileOut);
             fileOut.close();
@@ -125,6 +128,8 @@ public class MCVersionChecker {
         if (cbv == null) {
             cbv = "";
         }
+
+        //if (msz == null) return;
 
         ClassReader mscr = new ClassReader(msz.getResourceAsStream(msz.getSimpleName() + ".class"));
         ClassNode mscn = new ClassNode();
