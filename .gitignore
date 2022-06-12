@@ -34,3 +34,6 @@ build/
 ### Mac OS ###
 .DS_Store
 sheet.xlsx
+
+### Custom ###
+dependency-reduced-pom.xml
