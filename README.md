@@ -9,6 +9,7 @@ TODO:
 - [ ] Insert into spreadsheet file
 - [x] Basic info extraction
 - [ ] Extract from modern versions
+- [x] Add a GUI
 
 ## Requirements
 Java 17
