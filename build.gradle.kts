@@ -30,3 +30,9 @@ publishing {
         from(components["java"])
     }
 }
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "org.eimerarchive.MCVersionChecker"
+    }
+}
