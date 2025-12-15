@@ -18,6 +18,7 @@ import java.util.Properties;
 import java.util.Scanner;
 
 public class FileUtil {
+    private FileUtil() {}
 
     public static ClassLoader classLoader;
 

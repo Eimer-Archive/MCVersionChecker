@@ -17,14 +17,11 @@ public class CheckUI extends Application {
 
     @Override
     public void start(Stage stage) {
-
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("jar", "*.jar"));
 
         Group group = new Group();
         Scene scene = new Scene(group, 400, 320);
-
-        stage = new Stage();
 
         stage.setResizable(false);
         stage.setTitle("Version checking");
