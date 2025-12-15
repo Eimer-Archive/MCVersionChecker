@@ -11,39 +11,42 @@ import org.eimerarchive.util.FileUtil;
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CheckUI extends Application {
+    private List<File> fileList = new ArrayList<>();
 
     @Override
     public void start(Stage stage) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("jar", "*.jar"));
-
         Group group = new Group();
         Scene scene = new Scene(group, 400, 320);
 
         stage.setResizable(false);
-        stage.setTitle("Version checking");
+        stage.setTitle("Version Checker");
         stage.setScene(scene);
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("jar", "*.jar"));
 
         Button button = new Button();
         button.setText("Select file/s");
-        group.getChildren().add(button);
-
         button.setOnAction(e -> {
-            List<File> list = fileChooser.showOpenMultipleDialog(stage);
-            if (list != null) {
-                for (File file : list) {
-                    try {
-                        FileUtil.getBukkitVersion(file);
-                    } catch (IOException | NoSuchAlgorithmException ex) {
-                        System.err.println("Unable to get version from \"" + file.getAbsolutePath() + "\": " + ex.getMessage());
-                    }
+            fileList = fileChooser.showOpenMultipleDialog(stage);
+            if (fileList == null) {
+                return;
+            }
+
+            for (File file : fileList) {
+                try {
+                    FileUtil.getBukkitVersion(file);
+                } catch (IOException | NoSuchAlgorithmException ex) {
+                    System.err.println("Unable to get version from \"" + file.getAbsolutePath() + "\": " + ex.getMessage());
                 }
             }
         });
 
+        group.getChildren().add(button);
         stage.show();
     }
 }

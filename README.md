@@ -13,9 +13,12 @@ MCVersionChecker is a program that checks the version and commit information fro
 - [ ] Native executable compilation
 - [ ] Check the Eimer Archive API to see if the file exists there or not (Once the website API exists)
 
-## Requirements
 
+## Usage
+
+### Requirements
 - Java 25
-- Gradle 9+
 
 To use this download the latest version from the actions tab and run the program with `java -jar MCVersionChecker-1.0-SNAPSHOT.jar`. Then paste the file path to the jar files you want to scan.
+
+You can also use it without the UI by running `java -jar MCVersionChecker-1.0-SNAPSHOT.jar --scan /path/to/jar/file.jar`. To scan multiple files you can separate them with a comma.
