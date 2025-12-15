@@ -1,4 +1,4 @@
-package org.eimerarchive;
+package org.eimerarchive.util;
 
 import com.sun.tools.javac.Main;
 import org.objectweb.asm.ClassReader;

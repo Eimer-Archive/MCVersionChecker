@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.eimerarchive.util.FileUtil;
 
 import java.io.File;
 import java.io.IOException;
