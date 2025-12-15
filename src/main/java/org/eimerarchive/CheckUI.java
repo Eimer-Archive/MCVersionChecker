@@ -1,12 +1,6 @@
-package com.imjustdoom;
+package org.eimerarchive;
 
-import com.imjustdoom.util.FileUtil;
-import com.sun.scenario.Settings;
-import com.sun.tools.javac.Main;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

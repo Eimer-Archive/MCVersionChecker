@@ -1,4 +1,4 @@
-package com.imjustdoom.util;
+package org.eimerarchive;
 
 import com.sun.tools.javac.Main;
 import org.objectweb.asm.ClassReader;

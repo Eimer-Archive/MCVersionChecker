@@ -1,9 +1,9 @@
-package com.imjustdoom;
+package org.eimerarchive;
 
 import javafx.application.Application;
 
 public class MCVersionChecker {
-    public static void main(String[] args) {
+    static void main(String[] args) {
         Application.launch(CheckUI.class, args);
     }
 }
