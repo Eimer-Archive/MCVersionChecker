@@ -31,15 +31,14 @@ public class CheckUI extends Application {
         button.setText("Select file/s");
         group.getChildren().add(button);
 
-        Stage finalStage = stage;
         button.setOnAction(e -> {
-            List<File> list = fileChooser.showOpenMultipleDialog(finalStage);
+            List<File> list = fileChooser.showOpenMultipleDialog(stage);
             if (list != null) {
                 for (File file : list) {
                     try {
                         FileUtil.getBukkitVersion(file);
                     } catch (IOException | NoSuchAlgorithmException ex) {
-                        throw new RuntimeException(ex);
+                        System.err.println("Unable to get version from \"" + file.getAbsolutePath() + "\": " + ex.getMessage());
                     }
                 }
             }
