@@ -1,17 +1,21 @@
 # MCVersionChecker
 
-[![Build Status](https://ci.imjustdoom.com/view/MCArchive/job/MCArchive%20Bot/badge/icon?style=flat-square)](https://ci.imjustdoom.com/view/MCArchive/job/MCArchive%20Bot)
+![Build Status](https://github.com/Eimer-Archive/MCVersionChecker/actions/workflows/build.yml/badge.svg)
 [![Discord Server](https://img.shields.io/discord/979589333524820018?color=7289da&label=DISCORD&style=flat-square&logo=appveyor)](https://discord.gg/k8RcgxpnBS)
 
 MCVersionChecker is a program that checks the version and commit information from old CraftBukkit jar files. This does not work with newer files at the moment.
 
-TODO:
+### Features
 - [ ] Insert into spreadsheet file
 - [x] Basic info extraction
 - [ ] Extract from modern versions
 - [x] Add a GUI
+- [ ] Native executable compilation
+- [ ] Check the Eimer Archive API to see if the file exists there or not (Once the website API exists)
 
 ## Requirements
-Java 17
 
-To use this download the latest version from the actions tab and run the program with "java -jar MCVersionChecker-1.0-SNAPSHOT.jar". Then paste the file path to the jar files you want to scan.
+- Java 25
+- Gradle 9+
+
+To use this download the latest version from the actions tab and run the program with `java -jar MCVersionChecker-1.0-SNAPSHOT.jar`. Then paste the file path to the jar files you want to scan.
